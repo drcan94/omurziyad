@@ -1,6 +1,6 @@
 # INITIALS APP
 
-This project dedicated to my son "initial records" :) I planned to design a secure backend with django for my family to write about our son's initial records.
+This project dedicated to my son's "initial records" :) I planned to design a secure backend with django for my family to write about our son's initial records.
 
 ## API USAGE
 
