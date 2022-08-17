@@ -45,36 +45,4 @@ def update_user_profile(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-@permission_classes([IsAdminUser])
-def get_all_users(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
 
-
-@api_view(['GET'])
-@permission_classes([IsAdminUser])
-def get_user(request, id):
-    user = User.objects.get(id=id)
-    serializer = UserSerializer(user, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['PUT'])
-@permission_classes([IsAdminUser])
-def update_user(request, id):
-    user = User.objects.get(id=id)
-
-    data = request.data
-
-    user.first_name = data['name']
-    user.username = data['email']
-    user.email = data['email']
-    user.is_staff = data['isAdmin']
-
-    user.save()
-
-    serializer = UserSerializer(user, many=False)
-
-    return Response(serializer.data)
