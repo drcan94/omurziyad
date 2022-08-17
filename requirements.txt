@@ -17,6 +17,7 @@ distlib==0.3.4
 Django==4.0.1
 django-cors-headers==3.11.0
 django-editorjs==0.2.1
+django-environ==0.9.0
 django-extensions==3.1.5
 django-filter==21.1
 django-import-export==2.8.0

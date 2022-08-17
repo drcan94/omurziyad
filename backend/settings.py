@@ -1,6 +1,11 @@
 from datetime import timedelta
 from pathlib import Path
+import os
+import environ
 
+env = environ.Env()
+
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -110,13 +115,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': "dd4chsrs0sh49v",
-        'USER': "clslysdwxmyczp",
-        'PASSWORD': 'ce69f078e9c8d08c1854f9cf72565dfa11c1b6d1db2bb20cc1cdf495102cb836',
-        'HOST': "ec2-52-30-75-37.eu-west-1.compute.amazonaws.com",
-        'PORT': '5432'
+        'NAME': env('POSTGRES_DB_NAME'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
+
 
 
 # Password validation
