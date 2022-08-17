@@ -1,6 +1,11 @@
 ## API USAGE
 
+
 ##### All requests in live are only for my family members of course :) But you can also deploy for your usage. That's what this repo is for.
+###### For test in live, please visit this domain;
+```http
+  "https://omurziyad.herokuapp.com/"
+```
 
 #### Get all initials
 
