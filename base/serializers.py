@@ -74,5 +74,5 @@ class OmurInitialsSerializer(serializers.ModelSerializer):
     def get_full_name(obj):
         name = obj.commenter.get_full_name()
         if name == "":
-            return obj.email
+            return obj.commenter.email
         return name
