@@ -11,9 +11,9 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["www.omurziyad.heroku.com", "omurziyad.heroku.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "omurziyad.herokuapp.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
