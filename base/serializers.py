@@ -58,6 +58,21 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class OmurInitialsSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = OmurInitials
-        fields = '__all__'
+        fields = [
+            'id',
+            'commenter',
+            'content',
+            'created_at',
+            'full_name',
+        ]
+
+    @staticmethod
+    def get_full_name(obj):
+        name = obj.commenter.get_full_name()
+        if name == "":
+            return obj.email
+        return name
