@@ -30,3 +30,11 @@ def create_initial(request):
     )
     serializer = OmurInitialsSerializer(inital, many=False)
     return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_initial(request, id):
+    initial = OmurInitials.objects.get(id=id)
+    initial.delete()
+    return Response(id)
