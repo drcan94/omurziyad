@@ -13,7 +13,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "omurziyad.herokuapp.com"]
+ALLOWED_HOSTS = ["omurziyad.herokuapp.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -143,7 +143,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "https://omurziyad.vercel.app",
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
