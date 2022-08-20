@@ -15,6 +15,9 @@ from base.serializers import (
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+    default_error_messages = {
+        "no_active_account": "Girilen bilgilere ait bir hesap bulunamadı!"
+    }
 
 
 @api_view(['GET'])
