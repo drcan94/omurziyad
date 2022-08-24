@@ -50,7 +50,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         if self.user is None or not self.user.is_active:
             self.error_messages['no_active_account'] = (
-                'No active account found with the given credentials')
+                'Böyle bir hesap yok')
             raise exceptions.AuthenticationFailed(
                 self.error_messages['no_active_account'],
                 'no_active_account',
