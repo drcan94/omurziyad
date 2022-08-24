@@ -48,13 +48,7 @@ class UserSerializerWithToken(UserSerializer):
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
-        if self.user is None or not self.user.is_active:
-            self.error_messages['no_active_account'] = (
-                'Böyle bir hesap yok')
-            raise exceptions.AuthenticationFailed(
-                self.error_messages['no_active_account'],
-                'no_active_account',
-            )
+
         serializer = UserSerializerWithToken(self.user)
         serialized_data = serializer.data
         for key, value in serialized_data.items():
