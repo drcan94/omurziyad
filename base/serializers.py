@@ -50,11 +50,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
 
         data = super().validate(attrs)
-        serializer = UserSerializerWithToken(self.user)
-        serialized_data = serializer.data
-
-        for key, value in serialized_data.items():
-            data[key] = value
 
         try:
             user = User.objects.get(email=data['email'])
@@ -81,6 +76,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
                 self.error_messages['no_active_account'],
                 'no_active_account',
             )
+
+        serializer = UserSerializerWithToken(self.user)
+        serialized_data = serializer.data
+
+        for key, value in serialized_data.items():
+            data[key] = value
 
         return data
 
