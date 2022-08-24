@@ -1,9 +1,10 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
+from rest_framework import exceptions
 from django.contrib.auth.models import User
 from base.models import OmurInitials
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -47,12 +48,39 @@ class UserSerializerWithToken(UserSerializer):
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
-        data = super().validate(attrs)
 
+        data = super().validate(attrs)
         serializer = UserSerializerWithToken(self.user)
         serialized_data = serializer.data
+
         for key, value in serialized_data.items():
             data[key] = value
+
+        try:
+            user = User.objects.get(email=data['email'])
+            if not user.is_active:
+                self.error_messages['no_active_account'] = (
+                    'Bu hesap henüz aktif değil'
+                )
+                raise exceptions.AuthenticationFailed(
+                    self.error_messages['no_active_account'],
+                    'no_active_account',
+                )
+        except User.DoesNotExist:
+            self.error_messages['no_active_account'] = (
+                'Böyle bir hesap mevcut değil')
+            raise exceptions.AuthenticationFailed(
+                self.error_messages['no_active_account'],
+                'no_active_account',
+            )
+
+        if self.user is None:
+            self.error_messages['no_active_account'] = (
+                'Verilen bilgiler eşleşmedi')
+            raise exceptions.AuthenticationFailed(
+                self.error_messages['no_active_account'],
+                'no_active_account',
+            )
 
         return data
 
